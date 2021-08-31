@@ -1,0 +1,13 @@
+
+them upgrade
+landing page => file:///C:/Users/Robert/Downloads/themeforest-qUBIkqeQ-bootsland-creative-bootstrap-4-landing-page/main-files/Template/html/index.html
+contact us => file:///C:/Users/Robert/Downloads/themeforest-qUBIkqeQ-bootsland-creative-bootstrap-4-landing-page/main-files/Template/html/contact-us.html
+about us => file:///C:/Users/Robert/Downloads/themeforest-qUBIkqeQ-bootsland-creative-bootstrap-4-landing-page/main-files/Template/html/about-us-2.html
+faq,
+terms and condition
+privacy and policy
+
+Next Milestone:
+
+1. doctor can their add the customer
+2. admin can view number user reqistred

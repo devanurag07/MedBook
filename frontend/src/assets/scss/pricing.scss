@@ -1,0 +1,25 @@
+.card-pricing-recommended {
+    background-color: #6658dd;
+    color: #fff;
+}
+.card-pricing .card-pricing-plan-name {
+    padding-bottom: 20px;
+}
+.card-pricing-recommended .card-pricing-icon {
+    background-color: rgba(255,255,255,.1);
+}
+.card-pricing .card-pricing-price {
+    padding: 30px 0 0;
+}
+.card-pricing-recommended .card-pricing-features, .card-pricing-recommended .card-pricing-price span {
+    color: rgba(255,255,255,.7);
+}
+.card-pricing .card-pricing-features {
+    color: #98a6ad;
+    list-style: none;
+    margin: 0;
+    padding: 20px 0 0 0;
+}
+.ml{
+    margin-left: 32%;
+}

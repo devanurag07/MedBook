@@ -1,0 +1,20 @@
+.bg-pattern {
+    background-image: url("../images/bg-pattern-2.png");
+    background-size: cover;
+}
+
+.account-page {
+    a.text-primary:hover {
+        color: #3827c1 !important;
+    }
+    .border-primary {
+        border-color: #6658dd !important;
+    }
+    .text-primary {
+        color: #3827c1 !important;
+    }
+    .card {
+        margin-bottom: 24px;
+        box-shadow: 0 0.75rem 6rem rgba(56, 65, 74,.03);
+    }
+}

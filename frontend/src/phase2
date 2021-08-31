@@ -1,0 +1,9 @@
+1. Doctors can able to crate the customer
+2. Need to provide the customer login and they can able see prescriptions
+3. When Doctor's creating new we have to provide the option to search or add new customers
+4. Notification - After creating list of queue's, once the first customer consulation is completed we have to send the notification to second customer.
+5. Reports for Doctors => Doctor can able see number regirsterd customer and queues with filter option(date range)
+6. Reports for Admin:
+     1. Number regirsterd user count with filter(Doctors and end user)
+     2. Number of queues per users with filter option (Date range and user)
+     3. Payment received with filter option(date range and user wise)

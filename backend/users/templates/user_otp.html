@@ -1,0 +1,10 @@
+{% extends "base_email.html" %}
+
+{% block title %}
+    BEE Solutions OTP Verification
+{% endblock %}
+
+{% block content %}
+    <p>Hello <strong>{{ email }}</strong></p>
+    <p>Your One Time Verification: <strong>{{ otp }}</strong> </p>
+{% endblock %}

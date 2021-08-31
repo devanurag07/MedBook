@@ -1,0 +1,1 @@
+export const QUEUE_STATUS = [{id:0, name:'Open'}, {id:1, name:'Closed'}]

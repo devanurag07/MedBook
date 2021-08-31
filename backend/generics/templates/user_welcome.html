@@ -1,0 +1,16 @@
+{% extends "base_email.html" %}
+
+{% block title %}
+    User Created
+{% endblock %}
+
+{% block content %}
+    Hello <strong>{{ user_detail.first_name }} {{ user_detail.last_name }}</strong>
+
+    Your user account with BEE Cloud Portal has been created.<br><br>
+
+    Your login details:<br><br>
+    <strong>UserName</strong> : {{ user_detail.username }}<br>
+    <strong>Password</strong> : {{ password }}
+
+{% endblock %}
