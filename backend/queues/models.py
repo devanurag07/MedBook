@@ -16,7 +16,8 @@ class PrescriptionData(models.Model):
 
 # Create your models here.
 class Queue(models.Model):
-    customer = models.ForeignKey(QMUser, related_name='customer_details', on_delete=models.CASCADE)
+    customer = models.ForeignKey(
+        QMUser, related_name='customer_details', on_delete=models.CASCADE)
     note = models.TextField()
     status = models.IntegerField(default=0)
     deleted = models.BooleanField(default=False)
@@ -28,11 +29,12 @@ class Queue(models.Model):
 
 class Prescription(models.Model):
     customer_name = models.CharField(max_length=500, null=False)
-    customer = models.ForeignKey(QMUser, related_name='prescription_customer_details', on_delete=models.CASCADE, null=True)
+    customer = models.ForeignKey(
+        QMUser, related_name='prescription_customer_details', on_delete=models.CASCADE, null=True)
     clinic_name = models.CharField(max_length=500, null=False)
     mobile = models.BigIntegerField(null=False)
-    prescription = models.ForeignKey(PrescriptionData, related_name='prescription_queue_data',
-                                     on_delete=models.CASCADE)
+    prescription = models.ManyToManyField(PrescriptionData, related_name='prescription_queue_data',
+                                          )
     note = models.TextField()
     deleted = models.BooleanField(default=False)
     queue = models.ForeignKey(Queue, related_name='prescription_queue',

@@ -25,7 +25,8 @@ def jwt_response_payload_handler(token, user=None, request=None):
     user_details['accesses'] = list()
 
     if user.is_superuser:
-        user_details['accesses'] = AppDefaults.get_predefined_role_access_specifiers('Admin')
+        user_details['accesses'] = AppDefaults.get_predefined_role_access_specifiers(
+            'Admin')
     else:
         access_joined = user.groups.all().values_list('details__accesses', flat=True)
         for string in access_joined:
@@ -61,7 +62,7 @@ class UsersViewSet(viewsets.ModelViewSet):
         return query_set
 
     def destroy(self, request, *args, **kwargs):
-        #self.get_queryset().filter(id=kwargs['pk']).update(is_active=0)
+        # self.get_queryset().filter(id=kwargs['pk']).update(is_active=0)
         QMUser.objects.filter(id=kwargs['pk']).delete()
         return Response(True)
 
@@ -76,7 +77,8 @@ class UsersViewSet(viewsets.ModelViewSet):
     def get_customers(self, request, *args, **kwargs):
         from generics.constants import CUSTOMERS_USER_TYPE
         user_role = Roles.objects.filter(alias=CUSTOMERS_USER_TYPE).first()
-        query_set = QMUser.objects.filter(profile__role_id=user_role.id, profile__created_by=self.request.user)
+        query_set = QMUser.objects.filter(
+            profile__role_id=user_role.id, profile__created_by=self.request.user)
         query_params = request.query_params.dict()
         search_text = query_params.pop('searchText', None)
         if search_text is not None:
@@ -132,7 +134,7 @@ class UsersViewSet(viewsets.ModelViewSet):
         user = self.request.user
         user.first_name = request.data['first_name']
         user.save()
-        if hasattr(user,'profile'):
+        if hasattr(user, 'profile'):
             profile = user.profile
         else:
             from users.models import UserProfile
@@ -207,7 +209,8 @@ class UsersViewSet(viewsets.ModelViewSet):
         offset = int(query_params.pop('offset', 0))
         end = int(query_params.pop('limit', 5))
         username_list = [request.user.username, 'AnonymousUser']
-        queryset = self.get_queryset().filter(is_active=1).exclude(username__in=username_list)
+        queryset = self.get_queryset().filter(
+            is_active=1).exclude(username__in=username_list)
         order_by = query_params.pop('order_by', None)
         search_text = query_params.pop('searchText', None)
         customer = query_params.pop('customer', None)
@@ -220,7 +223,7 @@ class UsersViewSet(viewsets.ModelViewSet):
                 Q(email__icontains=search_text) |
                 Q(last_name__icontains=search_text))
 
-        from generics.constants import CUSTOMERS_USER_TYPE,Doctors_USER_TYPE
+        from generics.constants import CUSTOMERS_USER_TYPE, Doctors_USER_TYPE
         user_role = Roles.objects.filter(alias=CUSTOMERS_USER_TYPE).first()
         doctor_role = Roles.objects.filter(alias=Doctors_USER_TYPE).first()
         if customer is not None:
@@ -237,7 +240,8 @@ class UsersViewSet(viewsets.ModelViewSet):
 
         total_records = query_set.filter(is_active=1).count()
         query_set = query_set[offset:end]
-        serializer = UsersSerializer(query_set, many=True, context={'request': request})
+        serializer = UsersSerializer(
+            query_set, many=True, context={'request': request})
         return Response({'records': serializer.data, 'totalRecords': total_records})
 
 
@@ -252,7 +256,8 @@ class GroupsViewSet(viewsets.ModelViewSet):
             queryset = Group.objects.filter((Q(details__created_by=user) | Q(details__created_by=None))) \
                 .exclude(details__alias__isnull=True)
         else:
-            queryset = Group.objects.filter(details__created_by=user).exclude(details__alias__isnull=True)
+            queryset = Group.objects.filter(
+                details__created_by=user).exclude(details__alias__isnull=True)
 
         return queryset.order_by('details__alias')
 
@@ -276,7 +281,8 @@ class GroupsViewSet(viewsets.ModelViewSet):
         query = self.get_queryset().get(id=id)
         query.details.delete()
         queryset = self.get_queryset()
-        serializer = GroupSerializer(queryset, many=True, context={'request': request})
+        serializer = GroupSerializer(
+            queryset, many=True, context={'request': request})
         return Response(serializer.data)
 
 
@@ -308,7 +314,8 @@ class PasswordReset(APIView):
                 '*' * (dot_position - (at_sign_position + 2)),
                 email[dot_position:(last + 1)]
             )
-            raise CustomValidationErr("Email couldn't match with username. Hint: %s" % email_hint)
+            raise CustomValidationErr(
+                "Email couldn't match with username. Hint: %s" % email_hint)
 
         """ Generating token for password reset link """
         jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
@@ -349,7 +356,8 @@ class PasswordResetVerify(APIView):
             if PasswordResetTokens.objects.filter(token=data['token']).exists():
                 return Response(data['token'])
             else:
-                raise CustomValidationErr('It seems that link has been used already.')
+                raise CustomValidationErr(
+                    'It seems that link has been used already.')
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
